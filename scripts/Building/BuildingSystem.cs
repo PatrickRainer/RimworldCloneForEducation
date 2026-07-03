@@ -44,9 +44,6 @@ public class BuildingSystem
                 pathfinding.SetObstacle(building.Position, true);
             }
         }
-
-        // Remove completed buildings that are ready for cleanup
-        var completedBuildings = buildings.Where(b => b.IsComplete).ToList();
     }
 
     public Building GetBuildingAt(Vector2I position)

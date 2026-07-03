@@ -37,7 +37,7 @@ public class NeedsSystem
 
         // Cooldown to prevent spamming jobs
         if (lastHungerJobTime.TryGetValue(pawn.Id, out var lastTime) &&
-            (float)GD.Ticks / 1_000_000_000f - lastTime < MinJobCreationCooldown)
+            (float)Time.GetTicksMsec() / 1000f - lastTime < MinJobCreationCooldown)
             return;
 
         // Find nearest berry bush
@@ -46,7 +46,7 @@ public class NeedsSystem
         {
             var job = new EatJob(bushPosition.Value);
             jobSystem.AddJob(job);
-            lastHungerJobTime[pawn.Id] = (float)GD.Ticks / 1_000_000_000f;
+            lastHungerJobTime[pawn.Id] = (float)Time.GetTicksMsec() / 1000f;
         }
     }
 
@@ -57,7 +57,7 @@ public class NeedsSystem
 
         // Cooldown to prevent spamming jobs
         if (lastRestJobTime.TryGetValue(pawn.Id, out var lastTime) &&
-            (float)GD.Ticks / 1_000_000_000f - lastTime < MinJobCreationCooldown)
+            (float)Time.GetTicksMsec() / 1000f - lastTime < MinJobCreationCooldown)
             return;
 
         // Find a safe place to sleep (grass tile)
@@ -66,7 +66,7 @@ public class NeedsSystem
         {
             var job = new SleepJob(sleepPosition.Value);
             jobSystem.AddJob(job);
-            lastRestJobTime[pawn.Id] = (float)GD.Ticks / 1_000_000_000f;
+            lastRestJobTime[pawn.Id] = (float)Time.GetTicksMsec() / 1000f;
         }
     }
 
@@ -84,7 +84,7 @@ public class NeedsSystem
                 if (GameManager.Instance.GetTile(x, y) == resourceType)
                 {
                     var pos = new Vector2I(x, y);
-                    float distance = from.DistanceTo(pos);
+                    float distance = ((Vector2)from).DistanceTo((Vector2)pos);
                     if (distance < nearestDistance)
                     {
                         nearest = pos;

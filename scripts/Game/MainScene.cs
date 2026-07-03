@@ -1,9 +1,10 @@
 using Godot;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RimworldCloneForEducation;
 
-public class MainScene : Node2D
+public partial class MainScene : Node2D
 {
     private TileMapLayer tileMapLayer;
     private Camera2D camera;
@@ -120,7 +121,7 @@ public class MainScene : Node2D
 
         for (int i = 0; i < 6; i++)
         {
-            source.CreateAlternativeTile(new Vector2I(i, 0));
+            source.CreateTile(new Vector2I(i, 0));
         }
 
         tileSet.AddSource(source, 0);
@@ -132,11 +133,10 @@ public class MainScene : Node2D
             for (int y = 0; y < Constants.MapHeight; y++)
             {
                 TileType tileType = GameManager.Instance.GetTile(x, y);
-                var sourceId = new Vector2I(0, 0);
                 var atlasCoords = new Vector2I((int)tileType, 0);
                 var tile = new Vector2I(x, y);
 
-                tileMapLayer.SetCell(0, tile, sourceId, atlasCoords);
+                tileMapLayer.SetCell(tile, 0, atlasCoords);
             }
         }
     }

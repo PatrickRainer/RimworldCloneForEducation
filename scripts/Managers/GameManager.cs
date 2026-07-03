@@ -2,7 +2,7 @@ using Godot;
 
 namespace RimworldCloneForEducation;
 
-public class GameManager : Node
+public partial class GameManager : Node
 {
     public static GameManager Instance { get; private set; }
 

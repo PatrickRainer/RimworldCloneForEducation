@@ -11,6 +11,7 @@ public static class Constants
     public const float TreeThreshold = 0.55f;
     public const float RockThreshold = 0.35f;
     public const float BerryThreshold = 0.48f;
+    public const float DirtThreshold = 0.3f;
     public const float WaterThreshold = 0.2f;
 
     // Needs thresholds (0-100)

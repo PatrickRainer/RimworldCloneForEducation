@@ -40,8 +40,8 @@ public class MapGenerator
             > Constants.TreeThreshold => TileType.Tree,
             > Constants.BerryThreshold => TileType.BerryBush,
             > Constants.RockThreshold => TileType.Rock,
+            > Constants.DirtThreshold => TileType.Dirt,
             > Constants.WaterThreshold => TileType.Water,
-            > 0.3f => TileType.Dirt,
             _ => TileType.Grass,
         };
     }

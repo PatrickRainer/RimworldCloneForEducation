@@ -39,7 +39,7 @@ public class StockpileSystem
 
         foreach (var zone in stockpiles)
         {
-            float distance = position.DistanceTo(zone.Position);
+            float distance = ((Vector2)position).DistanceTo((Vector2)zone.Position);
             if (distance < nearestDistance)
             {
                 nearest = zone;

@@ -8,6 +8,7 @@ public class PawnManager
     private List<Pawn> pawns = new();
     private PathfindingSystem pathfinding;
     private const float MoveSpeed = 1f; // tiles per tick
+    private Dictionary<int, float> pawnMovementProgress = new();
 
     public IReadOnlyList<Pawn> Pawns => pawns.AsReadOnly();
 
@@ -59,22 +60,31 @@ public class PawnManager
         if (pawn.Path.Count == 0)
         {
             pawn.State = PawnState.Idle;
+            pawnMovementProgress.Remove(pawn.Id);
             return;
         }
+
+        if (!pawnMovementProgress.ContainsKey(pawn.Id))
+            pawnMovementProgress[pawn.Id] = 0f;
 
         // Move towards first waypoint in path
         var target = pawn.Path[0];
         Vector2 direction = (Vector2)(target - pawn.Position);
+        float distance = direction.Length();
 
-        if (direction.Length() < 0.1f)
+        pawnMovementProgress[pawn.Id] += MoveSpeed * delta;
+
+        if (pawnMovementProgress[pawn.Id] >= distance)
         {
             // Reached waypoint
             pawn.Position = target;
             pawn.Path.RemoveAt(0);
+            pawnMovementProgress[pawn.Id] = 0f;
 
             if (pawn.Path.Count == 0)
             {
                 pawn.State = PawnState.Idle;
+                pawnMovementProgress.Remove(pawn.Id);
             }
         }
     }

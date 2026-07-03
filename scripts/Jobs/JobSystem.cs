@@ -86,9 +86,13 @@ public class JobSystem
         {
             pawn.State = PawnState.MovingToTarget;
             pawn.TargetPosition = job.TargetPosition;
+            job.OnJobStart(pawn);
         }
-
-        job.OnJobStart(pawn);
+        else
+        {
+            activePawnJobs.Remove(pawn.Id);
+            jobs.Remove(job);
+        }
     }
 
     public void RemoveJob(int jobId)

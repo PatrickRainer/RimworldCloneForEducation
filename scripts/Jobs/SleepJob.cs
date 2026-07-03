@@ -30,7 +30,7 @@ public class SleepJob : Job
         var restBonus = GameManager.Instance.BuildingSystem.GetRestBonusAt(TargetPosition);
         var recovery = Constants.RestRecoveryPerTick * restBonus;
         sleepingProgress += recovery;
-        pawn.Rest = Mathf.Min(100f, pawn.Rest + recovery);
+        pawn.Rest = Mathf.Max(0f, pawn.Rest - recovery);
     }
 
     public override void OnJobComplete(Pawn pawn)
