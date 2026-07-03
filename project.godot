@@ -1,0 +1,29 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; but it is possible to edit it here. Be careful though if you edit it by hand (only the
+; recognized properties will be affected). Properties unrecognized by the editor will be lost.
+
+config_version=5
+
+[application]
+
+config/name="RimWorld Clone For Education"
+config/version="0.1.0"
+run/main_scene="res://scenes/main.tscn"
+
+[autoload]
+
+GameManager="*res://scripts/Managers/GameManager.cs"
+
+[debug]
+
+dotnet/project_assembly_name="RimworldCloneForEducation"
+
+[dotnet]
+
+project/assembly_name="RimworldCloneForEducation"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_mode=1

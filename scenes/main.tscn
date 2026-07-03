@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c23c4gjn0w47s"]
+
+[ext_resource type="Script" path="res://scripts/Game/MainScene.cs" id="1_j4jec"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_j4jec")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
