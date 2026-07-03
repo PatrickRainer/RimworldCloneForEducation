@@ -8,6 +8,7 @@ public class JobSystem
 {
     private List<Job> jobs = new();
     private Dictionary<int, Job> activePawnJobs = new(); // pawnId -> current job
+    private HashSet<int> jobsStarted = new(); // jobIds that have had OnJobStart called
 
     public IReadOnlyList<Job> Jobs => jobs.AsReadOnly();
 
@@ -31,12 +32,20 @@ public class JobSystem
             if (pawn.Position != job.TargetPosition)
                 continue;
 
+            // Call OnJobStart when pawn arrives at target for the first time
+            if (!jobsStarted.Contains(job.Id))
+            {
+                jobsStarted.Add(job.Id);
+                job.OnJobStart(pawn);
+            }
+
             job.OnJobUpdate(pawn, deltaTime);
 
             if (job.IsJobComplete(pawn))
             {
                 job.OnJobComplete(pawn);
                 jobs.Remove(job);
+                jobsStarted.Remove(job.Id);
                 completedJobs.Add(pawnId);
             }
         }
@@ -86,7 +95,6 @@ public class JobSystem
         {
             pawn.State = PawnState.MovingToTarget;
             pawn.TargetPosition = job.TargetPosition;
-            job.OnJobStart(pawn);
         }
         else
         {
